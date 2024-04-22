@@ -1,11 +1,9 @@
-import NavBar from "./components/Navbar";
-import Footer from "./components/Footer";
-import "./App.css";
+import NavBar from "./components/NavBar/Navbar";
+import Footer from "./components/Footer/Footer";
 import React, { useEffect, useState, createContext, useContext } from "react";
-
 import { Outlet } from "react-router-dom";
-import { useItems } from "./components/API/useItems";
-import { ItemContext } from "./components/ItemContext";
+import { ItemProvider } from "./components/Context/ItemContext";
+import { CartProvider } from "./components/Context/CartContext";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -15,15 +13,16 @@ function App() {
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
-  const Items = useItems();
 
   return (
     <>
-      <ItemContext.Provider value={Items}>
-        <NavBar ChangeTheme={ChangeTheme} />
-        <Outlet />
-        <Footer theme={theme} />
-      </ItemContext.Provider>
+      <CartProvider>
+        <ItemProvider>
+          <NavBar ChangeTheme={ChangeTheme} />
+          <Outlet />
+          <Footer theme={theme} />
+        </ItemProvider>
+      </CartProvider>
     </>
   );
 }

@@ -10,7 +10,10 @@ const useItems = () => {
       try {
         const data = await fetchProducts();
         if (!isCancelled) {
-          setItems(data);
+          data.forEach((item) => {
+            item.quantity = 0;
+          }),
+            setItems(data);
           setError(null);
           console.log(data);
         }

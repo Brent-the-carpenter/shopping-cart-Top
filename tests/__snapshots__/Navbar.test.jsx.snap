@@ -3,9 +3,10 @@
 exports[`Navbar component > renders a navbar 1`] = `
 <div>
   <div
-    class="NavContainer-sc-1sldpl7-0 cneFUv"
+    class="NavContainer-sc-1fvc24s-0 efPjhN"
   >
     <img
+      alt="Logo"
       src="src/assets/logo2.png"
     />
     <nav>
@@ -19,11 +20,15 @@ exports[`Navbar component > renders a navbar 1`] = `
       >
         Shop
       </a>
-      <a
-        href="/CheckoutPage"
+      <div
+        class="checkout"
       >
-        Checkout
-      </a>
+        <a
+          href="/CheckoutPage"
+        >
+          Checkout
+        </a>
+      </div>
     </nav>
     <button
       aria-label="Change Theme"
@@ -40,7 +45,7 @@ exports[`Navbar component > renders a navbar 1`] = `
     </button>
   </div>
   <hr
-    class="Hr-sc-1sldpl7-1 fCuAIm"
+    class="Hr-sc-1fvc24s-1 gycsKv"
   />
 </div>
 `;

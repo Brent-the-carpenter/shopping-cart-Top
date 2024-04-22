@@ -24,10 +24,41 @@
   --footer-text-color: rgb(222, 228, 234);
 }
 body {
-  height: 100%;
   margin: 0px;
-}
-html {
   height: 100%;
   width: 100vw;
+  overflow-x: hidden;
+}
+html {
+  height: calc(100% - 16px);
+  width: 100%;
+  margin: 0px;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  height: 100%;
+  box-sizing: border-box;
+
+  button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: var(--hover-focus-bg-color);
+  }
+  a {
+    color: var(--link-color);
+  }
+  a:hover {
+    color: var(--hover-focus-bg-color);
+    text-decoration: underline;
+    transform: scale(1.1);
+  }
 }

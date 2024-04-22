@@ -3,8 +3,22 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import App from "../src/App";
-import NavBar from "../src/components/Navbar";
+import NavBar from "../src/components/NavBar/Navbar";
 import "@testing-library/jest-dom";
+import { vi } from "vitest";
+
+vi.mock("../src/components/Context/CartContext", () => ({
+  useCartContext: vi.fn(() => ({
+    cart: [],
+    addToCart: vi.fn(),
+    removeFromCart: vi.fn(),
+    increaseQuantity: vi.fn(),
+    decreaseQuantity: vi.fn(),
+    clearCart: vi.fn(),
+  })),
+  CartProvider: ({ children }) => <div>{children}</div>,
+}));
+import { CartProvider } from "../src/components/Context/CartContext";
 
 describe("Navbar component", () => {
   it("renders a navbar", () => {
