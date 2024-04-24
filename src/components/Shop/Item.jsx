@@ -20,7 +20,11 @@ function Item({ item }) {
       <div className="description">
         {" "}
         Description
-        <button id="show-button" onClick={clickHandler}>
+        <button
+          data-testid={`show-button-${item.id}`}
+          id="show-button"
+          onClick={clickHandler}
+        >
           <svg
             className={ShowDetails ? "rotate" : ""}
             xmlns="http://www.w3.org/2000/svg"
@@ -35,6 +39,7 @@ function Item({ item }) {
       <div className="action-container">
         <div>${item.price}</div>
         <button
+          data-testid={`add-to-cart-${item.id}`}
           onClick={() => {
             addToCart(item);
           }}

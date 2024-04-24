@@ -1,0 +1,141 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Shop Component > displays items with all details when not loading and no error 1`] = `
+<div
+  class="ShopContainer-sc-zy8dpt-0 exddvK"
+  data-testid="shop-container"
+>
+  <h1>
+    Shop Page
+  </h1>
+  <div
+    class="search-container"
+  >
+    <input
+      placeholder="Search..."
+      type="text"
+      value=""
+    />
+    <svg
+      class="SearchIcon"
+      data-testid="search-icon"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+      />
+    </svg>
+  </div>
+  <div
+    class="item-container"
+  >
+    <div
+      class="Div-sc-1chur02-0 kzhfk item"
+    >
+      <div
+        class="image-container"
+      >
+        <img
+          alt="Item 1"
+          src="/path/to/image.jpg"
+        />
+      </div>
+      <h2>
+        Item 1
+      </h2>
+      <div
+        class="description"
+      >
+         
+        Description
+        <button
+          data-testid="show-button-1"
+          id="show-button"
+        >
+          <svg
+            class=""
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M7,10L12,15L17,10H7Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <p
+        class=""
+      >
+        Test Description
+      </p>
+      <div
+        class="action-container"
+      >
+        <div>
+          $
+          10
+        </div>
+        <button
+          data-testid="add-to-cart-1"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+    <div
+      class="Div-sc-1chur02-0 kzhfk item"
+    >
+      <div
+        class="image-container"
+      >
+        <img
+          alt="Item 2"
+          src="/path/to/image2.jpg"
+        />
+      </div>
+      <h2>
+        Item 2
+      </h2>
+      <div
+        class="description"
+      >
+         
+        Description
+        <button
+          data-testid="show-button-2"
+          id="show-button"
+        >
+          <svg
+            class=""
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M7,10L12,15L17,10H7Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <p
+        class=""
+      >
+        Test Description 2
+      </p>
+      <div
+        class="action-container"
+      >
+        <div>
+          $
+          20
+        </div>
+        <button
+          data-testid="add-to-cart-2"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

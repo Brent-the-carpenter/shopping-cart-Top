@@ -1,68 +1,116 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
-
-// Import the actual components and contexts if needed
-import ShopPage from "../src/components/Shop/ShopPage";
-import {
-  CartProvider,
-  useCartContext,
-} from "../src/components/Context/CartContext";
+import { BrowserRouter } from "react-router-dom";
+import { CartProvider } from "../src/components/Context/CartContext";
 import { ItemProvider } from "../src/components/Context/ItemContext";
+import ShopPage from "../src/components/Shop/ShopPage";
+import * as useItemsModule from "../src/components/API/useItems";
 
-// Mock the useCartContext function directly
-const addToCartMock = vi.fn();
-vi.mock("../src/components/Context/CartContext", () => ({
-  useCartContext: vi.fn(() => ({
-    cart: [],
-    addToCart: addToCartMock,
-    removeFromCart: vi.fn(),
-    increaseQuantity: vi.fn(),
-    decreaseQuantity: vi.fn(),
-    clearCart: vi.fn(),
-  })),
-  CartProvider: ({ children }) => <div>{children}</div>, // Ensure children are rendered
-}));
+// Mock the entire module
+vi.mock("../src/components/API/useItems");
 
-vi.mock("../src/components/Context/ItemContext", () => ({
-  useItemsContext: vi.fn(() => ({
-    items: [
-      {
-        id: 1,
-        name: "Test Product",
-        price: 10,
-        image: "test.jpg",
-        description: "Test Description",
-      },
-    ],
-    loading: false,
-    error: null,
-  })),
-  ItemProvider: ({ children }) => <div>{children}</div>, // Ensure children are rendered
-}));
-
-describe("ShopPage Component", () => {
-  let user;
-
+describe("Shop Component", () => {
   beforeEach(() => {
-    user = userEvent.setup();
-    render(
-      <CartProvider>
-        <ItemProvider>
-          <ShopPage />
-        </ItemProvider>
-      </CartProvider>
+    // Reset mocks and define default behavior
+    vi.resetAllMocks();
+    useItemsModule.useItems.mockReturnValue({
+      items: [
+        {
+          id: 1,
+          title: "Item 1",
+          price: 10,
+          description: "Test Description",
+          image: "/path/to/image.jpg",
+        },
+        {
+          id: 2,
+          title: "Item 2",
+          price: 20,
+          description: "Test Description 2",
+          image: "/path/to/image2.jpg",
+        },
+      ],
+      loading: false,
+      error: null,
+    });
+  });
+
+  it("displays items with all details when not loading and no error", async () => {
+    const { getByRole, getAllByText, getByTestId } = render(
+      <BrowserRouter>
+        <CartProvider>
+          <ItemProvider>
+            <ShopPage />
+          </ItemProvider>
+        </CartProvider>
+      </BrowserRouter>
     );
+
+    await waitFor(() => {
+      expect(getByRole("heading", { name: "Item 1" })).toBeInTheDocument();
+    });
+
+    const button = getByTestId("show-button-1");
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(getAllByText("Test Description")).toHaveLength(1);
+      expect(getAllByText("Add to Cart")).toHaveLength(2);
+    });
+
+    expect(getByTestId("shop-container")).toMatchSnapshot();
+  });
+});
+
+describe("Shop Component Error Handling", () => {
+  beforeEach(() => {
+    useItemsModule.useItems.mockReturnValue({
+      items: [],
+      loading: false,
+      error: { message: "Not found" },
+    });
   });
 
-  afterEach(() => {
-    cleanup();
-    vi.restoreAllMocks();
+  it("displays error message when error occurs", async () => {
+    render(
+      <BrowserRouter>
+        <CartProvider>
+          <ItemProvider>
+            <ShopPage />
+          </ItemProvider>
+        </CartProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Error: Not found")).toBeInTheDocument();
+    });
+  });
+});
+
+describe("Shop Component Loading State", () => {
+  beforeEach(() => {
+    useItemsModule.useItems.mockReturnValue({
+      items: [],
+      loading: true,
+      error: null,
+    });
   });
 
-  it("calls addToCart when 'Add to Cart' button is clicked", async () => {
-    const button = await screen.findByRole("button", { name: "Add to Cart" });
-    await user.click(button);
-    expect(addToCartMock).toHaveBeenCalledTimes(1);
+  it("displays loading state when loading", async () => {
+    render(
+      <BrowserRouter>
+        <CartProvider>
+          <ItemProvider>
+            <ShopPage />
+          </ItemProvider>
+        </CartProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Loading...")).toBeInTheDocument();
+    });
   });
 });
