@@ -34,7 +34,7 @@ const Container = Styled.div`
       gap: 10px;
       width: 50%;
       padding: 10px;
-    
+      background: rgba(255, 255, 255, 0.2);
         border-radius: 10px;
   }
   #button-link {
