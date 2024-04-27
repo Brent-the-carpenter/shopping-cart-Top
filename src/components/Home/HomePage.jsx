@@ -14,7 +14,7 @@ const Container = Styled.div`
   background-image: url(${background});
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: bottom;
+    background-position: 0px -20px;
     
   
 
@@ -24,7 +24,7 @@ const Container = Styled.div`
     ;
   }
   p{
-    color:rgba(247, 248, 249, 0.8);
+    color:rgba(255, 255, 255, 0.8);
   }
 
   div {
@@ -34,8 +34,11 @@ const Container = Styled.div`
       gap: 10px;
       width: 50%;
       padding: 10px;
-    
+      background: rgba(255, 255, 255, 0.4);
         border-radius: 10px;
+        p{
+          color: rgba(0, 0, 0, 0.8);
+        }
   }
   #button-link {
       padding: 10px;
