@@ -15,7 +15,7 @@ const useItems = () => {
           }),
             setItems(data);
           setError(null);
-          console.log(data);
+          // console.log(data);
         }
       } catch (error) {
         if (!isCancelled) {
@@ -23,7 +23,7 @@ const useItems = () => {
             ? setError("An error occurred")
             : setError(error);
           setItems([]);
-          console.log(error.message);
+          // console.log(error.message);
         }
       } finally {
         if (!isCancelled) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Styled from "styled-components";
-
+import background from "../../assets/homepageImg.jpg";
 const Container = Styled.div`
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@ const Container = Styled.div`
   text-align: center;
   gap: 10px;
   font-size: 2rem;
-  background-image: url("src/assets/homepageImg.jpg");
+  background-image: url(${background});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;

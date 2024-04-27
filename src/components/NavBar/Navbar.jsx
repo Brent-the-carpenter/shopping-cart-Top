@@ -3,6 +3,7 @@ import PropTypes from "prop-types"; // Correct the case for PropTypes
 import { Hr, NavContainer } from "./StyledNavBar";
 import { useCartContext } from "../Context/CartContext";
 import { useEffect, useState } from "react";
+import logo from "../../assets/logo2.png";
 
 function NavBar({ ChangeTheme }) {
   const { cart, increaseQuantity, decreaseQuantity } = useCartContext();
@@ -12,11 +13,12 @@ function NavBar({ ChangeTheme }) {
     const numberOfItems = cart.reduce((acc, item) => acc + item.quantity, 0);
     setNumber(numberOfItems);
   }, [cart.length, increaseQuantity, decreaseQuantity]);
+
   const checkNumber = number === 0 ? "" : number;
   return (
     <>
       <NavContainer>
-        <img src="src/assets/logo2.png" alt="Logo" />
+        <img src={logo} alt="Logo" />
 
         <nav>
           <Link to="/">Home</Link>
@@ -24,7 +26,9 @@ function NavBar({ ChangeTheme }) {
           <div className="checkout">
             <Link to="/CheckoutPage">Checkout</Link>
             {cart.length > 0 && (
-              <span className="cart-items-count">{checkNumber}</span>
+              <span data-testid="cart-count" className="cart-items-count">
+                {checkNumber}
+              </span>
             )}
           </div>
         </nav>

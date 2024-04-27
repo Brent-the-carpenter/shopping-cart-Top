@@ -1,5 +1,6 @@
 import React from "react";
-
+import githubWhite from "../../assets/github-mark/github-mark-white.svg";
+import githubBlack from "../../assets/github-mark/github-mark.svg";
 import propTypes from "prop-types";
 import Container from "./StyledFooter";
 const Footer = (props) => {
@@ -8,12 +9,8 @@ const Footer = (props) => {
       <p>Brent-The-Carpenter</p>
       <a href="https://github.com/Brent-the-carpenter/shopping-cart-Top">
         <img
-          src={
-            props.theme === "light"
-              ? "src/assets/github-mark/github-mark.svg"
-              : "src/assets/github-mark/github-mark-white.svg"
-          }
-          alt=""
+          src={props.theme === "light" ? githubBlack : githubWhite}
+          alt="github link"
         />
       </a>
     </Container>

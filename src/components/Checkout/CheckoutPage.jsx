@@ -9,6 +9,7 @@ function CheckoutPage() {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart,
   } = useCartContext();
   const [total, setTotal] = useState(0);
   useEffect(() => {
@@ -20,25 +21,29 @@ function CheckoutPage() {
   }, [cart]);
 
   return (
-    <Container>
+    <Container data-testid="container">
       <div>
         <h1>Checkout</h1>
         {cart.length === 0 ? (
           <p className="empty">your cart is empty!! Get to shopping</p>
         ) : (
-          <ul>
+          <ul data-testid="list">
             {cart.map((item) => (
               <li key={item.id}>
-                <img src={item.image} alt={item.name} />
+                <img src={item.image} alt={item.title} />
                 <div>
-                  <p>{item.title}</p>
+                  <h3>{item.title}</h3>
                   <p>price ${item.price}</p>
                   <div>
-                    <div className="quantity">
+                    <div
+                      data-testid={`item-${item.id}-quantity`}
+                      className="quantity"
+                    >
                       {" "}
                       Quantity: {item.quantity}
                       <div>
                         <svg
+                          data-testid={`decrease-quantity${item.id}`}
                           onClick={() => {
                             decreaseQuantity(item);
                           }}
@@ -48,6 +53,7 @@ function CheckoutPage() {
                           <path d="M19,13H5V11H19V13Z" />
                         </svg>
                         <svg
+                          data-testid={`increase-quantity${item.id}`}
                           onClick={() => {
                             increaseQuantity(item);
                           }}
@@ -59,6 +65,7 @@ function CheckoutPage() {
                       </div>
                     </div>
                     <button
+                      data-testid={`remove${item.id}`}
                       onClick={() => {
                         removeFromCart(item);
                       }}
@@ -71,8 +78,18 @@ function CheckoutPage() {
             ))}
           </ul>
         )}
-        <div className="total">your total is ${total.toFixed(2)} </div>
+        <div data-testid="total" className="total">
+          your total is ${total.toFixed(2)}{" "}
+        </div>
       </div>
+      <button
+        data-testid="clear-cart"
+        className="clear-cart"
+        onClick={clearCart}
+      >
+        {" "}
+        Clear Cart
+      </button>
     </Container>
   );
 }

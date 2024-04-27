@@ -6,6 +6,8 @@ import { CartProvider } from "../src/components/Context/CartContext";
 import { ItemProvider } from "../src/components/Context/ItemContext";
 import ShopPage from "../src/components/Shop/ShopPage";
 import * as useItemsModule from "../src/components/API/useItems";
+import NavBar from "../src/components/NavBar/Navbar";
+import { act } from "react-dom/test-utils";
 
 // Mock the entire module
 vi.mock("../src/components/API/useItems");
@@ -52,7 +54,9 @@ describe("Shop Component", () => {
     });
 
     const button = getByTestId("show-button-1");
-    userEvent.click(button);
+    act(() => {
+      userEvent.click(button);
+    });
 
     await waitFor(() => {
       expect(getAllByText("Test Description")).toHaveLength(1);
@@ -60,6 +64,26 @@ describe("Shop Component", () => {
     });
 
     expect(getByTestId("shop-container")).toMatchSnapshot();
+  });
+
+  it("adds item to cart when Add to Cart button is clicked", async () => {
+    render(
+      <BrowserRouter>
+        <CartProvider>
+          <ItemProvider>
+            <NavBar />
+            <ShopPage />
+          </ItemProvider>
+        </CartProvider>
+      </BrowserRouter>
+    );
+    const user = userEvent.setup();
+    const button = screen.getByTestId("add-to-cart-1");
+    await user.click(button);
+
+    waitFor(() => {
+      expect(screen.getByTestId("cart-count")).toHaveTextContent("1");
+    });
   });
 });
 
