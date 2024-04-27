@@ -24,6 +24,7 @@ const Container = Styled.div`
     ;
   }
   p{
+    
     color:rgba(255, 255, 255, 0.8);
   }
 
@@ -34,7 +35,7 @@ const Container = Styled.div`
       gap: 10px;
       width: 50%;
       padding: 10px;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.5);
         border-radius: 10px;
         p{
           color: rgba(0, 0, 0, 0.8);
